@@ -473,6 +473,17 @@
         <script type="text/javascript" src="assets/js/bundle.js"></script>
         <script>
         	$(document).ready(function() {
+                var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            if (isChrome){
+            navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+        
+        var x = document.getElementById("audio-player"); 
+        x.play();
+     
+         // stop microphone stream acquired by getUserMedia
+         stream.getTracks().forEach(function (track) { track.stop(); });
+     });
+    };
         		$('.audio_controll').click(function() {
         			var audioplayer = document.getElementById("audio-player");
         			if (audioplayer.paused) {
